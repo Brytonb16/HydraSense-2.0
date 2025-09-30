@@ -1,0 +1,14 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="15%" x2="100%" y2="85%">
+      <stop offset="0%" stop-color="#e4f9ff" />
+      <stop offset="100%" stop-color="#6ec1ff" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" rx="24" fill="url(#grad)" />
+  <path d="M80 225C140 205 200 220 250 205C300 190 350 175 400 185" stroke="#1f6da8" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.88" />
+  <circle cx="190" cy="140" r="34" fill="#1f6da8" opacity="0.22" />
+  <circle cx="300" cy="120" r="28" fill="#1f6da8" opacity="0.18" />
+  <text x="50%" y="54%" text-anchor="middle" fill="#134265" font-size="26" font-weight="700" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">Gala Section</text>
+  <text x="50%" y="70%" text-anchor="middle" fill="#134265" font-size="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" opacity="0.82">Nutrients balanced</text>
+</svg>

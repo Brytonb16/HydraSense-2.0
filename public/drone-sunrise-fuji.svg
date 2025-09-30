@@ -1,0 +1,14 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#e7fdea" />
+      <stop offset="100%" stop-color="#66d189" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" rx="24" fill="url(#grad)" />
+  <path d="M70 220C130 205 210 225 260 205C310 185 340 175 400 195" stroke="#1f7c43" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.88" />
+  <circle cx="190" cy="140" r="34" fill="#1f7c43" opacity="0.2" />
+  <circle cx="300" cy="120" r="28" fill="#1f7c43" opacity="0.18" />
+  <text x="50%" y="54%" text-anchor="middle" fill="#12502a" font-size="26" font-weight="700" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">Fuji Section</text>
+  <text x="50%" y="70%" text-anchor="middle" fill="#12502a" font-size="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" opacity="0.82">Moisture improving</text>
+</svg>

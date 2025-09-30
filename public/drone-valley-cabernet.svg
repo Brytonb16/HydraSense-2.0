@@ -1,0 +1,14 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="20%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#f0e0ff" />
+      <stop offset="100%" stop-color="#a87be5" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" rx="24" fill="url(#grad)" />
+  <path d="M70 220C150 200 190 230 250 210C310 190 340 170 410 195" stroke="#5e2c99" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.88" />
+  <circle cx="170" cy="140" r="36" fill="#5e2c99" opacity="0.2" />
+  <circle cx="320" cy="120" r="30" fill="#5e2c99" opacity="0.18" />
+  <text x="50%" y="54%" text-anchor="middle" fill="#341a57" font-size="26" font-weight="700" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">Cabernet Block</text>
+  <text x="50%" y="70%" text-anchor="middle" fill="#341a57" font-size="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" opacity="0.84">Berry set uniform</text>
+</svg>
