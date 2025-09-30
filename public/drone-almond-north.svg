@@ -1,0 +1,14 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#dff8e7" />
+      <stop offset="100%" stop-color="#8ad1a0" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" rx="24" fill="url(#grad)" />
+  <path d="M70 220C115 205 170 180 230 210C290 240 345 200 390 175" stroke="#2d7f5f" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.85" />
+  <circle cx="180" cy="140" r="40" fill="#2d7f5f" opacity="0.22" />
+  <circle cx="320" cy="120" r="28" fill="#2d7f5f" opacity="0.18" />
+  <text x="50%" y="54%" text-anchor="middle" fill="#114734" font-size="26" font-weight="700" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">North Block</text>
+  <text x="50%" y="70%" text-anchor="middle" fill="#114734" font-size="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" opacity="0.8">Canopy vigor trending high</text>
+</svg>

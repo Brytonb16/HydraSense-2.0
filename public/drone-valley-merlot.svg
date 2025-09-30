@@ -1,0 +1,14 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#ffe9f0" />
+      <stop offset="100%" stop-color="#f07fb5" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" rx="24" fill="url(#grad)" />
+  <path d="M90 230C150 190 200 215 250 200C300 185 340 165 390 175" stroke="#a8346a" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9" />
+  <circle cx="190" cy="140" r="32" fill="#a8346a" opacity="0.22" />
+  <circle cx="300" cy="110" r="26" fill="#a8346a" opacity="0.18" />
+  <text x="50%" y="54%" text-anchor="middle" fill="#681d3f" font-size="26" font-weight="700" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">Merlot Block</text>
+  <text x="50%" y="70%" text-anchor="middle" fill="#681d3f" font-size="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" opacity="0.82">Low vigor rows detected</text>
+</svg>

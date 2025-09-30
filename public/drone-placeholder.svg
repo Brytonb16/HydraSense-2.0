@@ -1,0 +1,16 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d7f2ff" />
+      <stop offset="100%" stop-color="#9ed8ff" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" rx="24" fill="url(#grad)" />
+  <g opacity="0.9">
+    <path d="M80 220C120 180 180 160 240 200C300 240 360 220 400 180" stroke="#0a6a73" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <circle cx="160" cy="150" r="26" fill="#0a6a73" opacity="0.18" />
+    <circle cx="320" cy="120" r="34" fill="#0a6a73" opacity="0.22" />
+  </g>
+  <text x="50%" y="52%" text-anchor="middle" fill="#0a3142" font-size="24" font-weight="600" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">Drone imagery pending</text>
+  <text x="50%" y="68%" text-anchor="middle" fill="#0a3142" font-size="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" opacity="0.8">Upload data to unlock insights</text>
+</svg>

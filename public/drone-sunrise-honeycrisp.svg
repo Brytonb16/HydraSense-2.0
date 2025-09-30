@@ -1,0 +1,14 @@
+<svg width="480" height="320" viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="5%" y1="0%" x2="95%" y2="100%">
+      <stop offset="0%" stop-color="#fff0d9" />
+      <stop offset="100%" stop-color="#ffb25b" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="320" rx="24" fill="url(#grad)" />
+  <path d="M70 225C130 195 210 215 260 195C310 175 340 165 400 185" stroke="#c86a1f" stroke-width="8" stroke-linecap="round" fill="none" opacity="0.9" />
+  <circle cx="190" cy="140" r="34" fill="#c86a1f" opacity="0.22" />
+  <circle cx="300" cy="120" r="28" fill="#c86a1f" opacity="0.18" />
+  <text x="50%" y="54%" text-anchor="middle" fill="#7b3d10" font-size="26" font-weight="700" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">Honeycrisp</text>
+  <text x="50%" y="70%" text-anchor="middle" fill="#7b3d10" font-size="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" opacity="0.85">High canopy density</text>
+</svg>

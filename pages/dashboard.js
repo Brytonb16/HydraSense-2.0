@@ -6,6 +6,13 @@ import { farms } from '../data/farms';
 
 const REQUIRED_SOIL_HEADERS = ['zone', 'moisture', 'fertility', 'recommendation'];
 
+const DEFAULT_DRONE_PLACEHOLDER = {
+  status: 'Awaiting upload',
+  image: '/drone-placeholder.svg',
+  summary: 'Drone imagery has not been processed for this zone yet.',
+  recommendation: 'Upload the latest drone imagery to receive AI-assisted insights.'
+};
+
 const parseSoilCsv = (csvText) => {
   const lines = csvText
     .split(/\r?\n/)
@@ -36,7 +43,8 @@ const parseSoilCsv = (csvText) => {
       name: zoneName,
       moisture: cells[headerIndexes[1]] || 'Unknown',
       fertility: cells[headerIndexes[2]] || 'Unknown',
-      recommendation: cells[headerIndexes[3]] || 'No recommendation provided'
+      recommendation: cells[headerIndexes[3]] || 'No recommendation provided',
+      droneImagery: { ...DEFAULT_DRONE_PLACEHOLDER }
     };
   });
 
@@ -163,16 +171,35 @@ export default function Dashboard() {
         </section>
 
         <section className="zones-grid">
-          {displayFarm.zones.map((zone) => (
-            <article className="card zone-card" key={zone.id}>
-              <h3>{zone.name}</h3>
-              <div className="zone-details">
-                <p><span>Soil Moisture</span><strong>{zone.moisture}</strong></p>
-                <p><span>Fertility</span><strong>{zone.fertility}</strong></p>
-                <p><span>AI Recommendation</span><strong>{zone.recommendation}</strong></p>
-              </div>
-            </article>
-          ))}
+          {displayFarm.zones.map((zone) => {
+            const droneImagery = { ...DEFAULT_DRONE_PLACEHOLDER, ...(zone.droneImagery || {}) };
+
+            return (
+              <article className="card zone-card" key={zone.id}>
+                <h3>{zone.name}</h3>
+                <div className="zone-layout">
+                  <div className="zone-details">
+                    <p><span>Soil Moisture</span><strong>{zone.moisture}</strong></p>
+                    <p><span>Fertility</span><strong>{zone.fertility}</strong></p>
+                    <p><span>AI Recommendation</span><strong>{zone.recommendation}</strong></p>
+                  </div>
+                  <div className="zone-drone">
+                    <div className="zone-drone-header">
+                      <h4>Drone Imagery Results</h4>
+                      <span className={`drone-status drone-status-${droneImagery.status.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
+                        {droneImagery.status}
+                      </span>
+                    </div>
+                    <div className="drone-image-wrapper">
+                      <img src={droneImagery.image} alt={`Drone imagery for ${zone.name}`} />
+                    </div>
+                    <p className="drone-summary">{droneImagery.summary}</p>
+                    <p className="drone-recommendation"><strong>Recommendation:</strong> {droneImagery.recommendation}</p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </section>
 
         <section className="card actions-card">
