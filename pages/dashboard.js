@@ -47,7 +47,7 @@ const parseSoilCsv = (csvText) => {
   return zones;
 };
 
-const cloneFarm = (farm) => JSON.parse(JSON.stringify(farm));
+const deepClone = (value) => JSON.parse(JSON.stringify(value));
 
 export default function Dashboard() {
   const router = useRouter();
@@ -55,6 +55,7 @@ export default function Dashboard() {
 
   const [selectedFarmId, setSelectedFarmId] = useState('');
   const [displayFarm, setDisplayFarm] = useState(null);
+  const [customSoilData, setCustomSoilData] = useState({});
   const [soilUploadError, setSoilUploadError] = useState('');
   const [soilUploadSuccess, setSoilUploadSuccess] = useState('');
 
@@ -62,8 +63,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (!router.isReady) return;
-    if (typeof farmId === 'string' && farms.some((farm) => farm.id === farmId)) {
-      setSelectedFarmId(farmId);
+    const initialFarmId = Array.isArray(farmId) ? farmId[0] : farmId;
+
+    if (typeof initialFarmId === 'string' && farms.some((farm) => farm.id === initialFarmId)) {
+      setSelectedFarmId(initialFarmId);
     } else if (farms.length > 0) {
       setSelectedFarmId(farms[0].id);
     }
@@ -73,10 +76,17 @@ export default function Dashboard() {
     if (!selectedFarmId) return;
     const baseFarm = farms.find((farm) => farm.id === selectedFarmId);
     if (!baseFarm) return;
-    setDisplayFarm(cloneFarm(baseFarm));
+
+    const uploadedZones = customSoilData[selectedFarmId];
+    const farmToDisplay = deepClone(baseFarm);
+    if (uploadedZones) {
+      farmToDisplay.zones = deepClone(uploadedZones);
+    }
+
+    setDisplayFarm(farmToDisplay);
     setSoilUploadError('');
     setSoilUploadSuccess('');
-  }, [selectedFarmId]);
+  }, [selectedFarmId, customSoilData]);
 
   const handleFarmChange = (event) => {
     const newFarmId = event.target.value;
@@ -91,7 +101,8 @@ export default function Dashboard() {
     try {
       const fileContents = await file.text();
       const zones = parseSoilCsv(fileContents);
-      setDisplayFarm((current) => (current ? { ...current, zones } : current));
+      setCustomSoilData((previous) => ({ ...previous, [selectedFarmId]: zones }));
+      setDisplayFarm((current) => (current ? { ...current, zones: deepClone(zones) } : current));
       setSoilUploadError('');
       setSoilUploadSuccess(`Loaded soil data from ${file.name}`);
     } catch (error) {
@@ -111,6 +122,7 @@ export default function Dashboard() {
   };
 
   const targetFarmId = selectedFarmId || farms[0]?.id || '';
+  const isUsingUploadedSoilData = Boolean(customSoilData[selectedFarmId]);
   const activeRecommendation = displayFarm?.zones?.[0]?.recommendation || 'Monitor conditions and await new telemetry.';
   const zoneCount = displayFarm?.zones?.length || 0;
 
@@ -153,6 +165,11 @@ export default function Dashboard() {
 
       <section className="card card--surface">
         <h2>Farm Overview</h2>
+        {isUsingUploadedSoilData && (
+          <p className="status status--success" role="status">
+            Displaying soil insights from your latest CSV upload.
+          </p>
+        )}
         <div className="card-grid">
           <div>
             <p className="panel-title">Primary Crop</p>
