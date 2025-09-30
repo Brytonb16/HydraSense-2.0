@@ -112,54 +112,77 @@ export default function Dashboard() {
 
   if (!displayFarm) {
     return (
-      <div className="container">
+      <div className="container dashboard-page">
         <Head><title>Dashboard | HydraSense AI</title></Head>
         <div className="header"><img src="/logo.svg" alt="Logo" /></div>
-        <div className="card">
-          <h1>Farm Dashboard</h1>
-          <p>Loading farm data...</p>
-        </div>
+        <main className="dashboard-content">
+          <section className="card primary-card">
+            <h1>Farm Dashboard</h1>
+            <p>Loading farm data...</p>
+          </section>
+        </main>
       </div>
     );
   }
 
   return (
-    <div className="container">
+    <div className="container dashboard-page">
       <Head><title>Dashboard | HydraSense AI</title></Head>
       <div className="header"><img src="/logo.svg" alt="Logo" /></div>
-      <div className="card">
-        <h1>{displayFarm.name}</h1>
-        <p><strong>Location:</strong> {displayFarm.location}</p>
-        <p><strong>Primary Crop:</strong> {displayFarm.crop}</p>
-        <p><strong>Acreage:</strong> {displayFarm.acreage} acres</p>
-        <label htmlFor="farm-select" style={{ marginTop: '1rem', display: 'block' }}>Switch Farm</label>
-        <select id="farm-select" value={selectedFarmId} onChange={handleFarmChange}>
-          {farmOptions.map((farm) => (
-            <option key={farm.id} value={farm.id}>{farm.name}</option>
+      <main className="dashboard-content">
+        <section className="card primary-card">
+          <h1>{displayFarm.name}</h1>
+          <p className="card-subtitle">{displayFarm.location}</p>
+          <div className="farm-highlights">
+            <div>
+              <span className="highlight-label">Primary Crop</span>
+              <span className="highlight-value">{displayFarm.crop}</span>
+            </div>
+            <div>
+              <span className="highlight-label">Acreage</span>
+              <span className="highlight-value">{displayFarm.acreage} acres</span>
+            </div>
+          </div>
+          <label htmlFor="farm-select" className="input-label">Switch Farm</label>
+          <select id="farm-select" value={selectedFarmId} onChange={handleFarmChange}>
+            {farmOptions.map((farm) => (
+              <option key={farm.id} value={farm.id}>{farm.name}</option>
+            ))}
+          </select>
+        </section>
+
+        <section className="card upload-card">
+          <h2>Upload New Data</h2>
+          <p className="section-description">Keep your dashboards up-to-date with the latest sensor and drone insights.</p>
+          <label htmlFor="drone-upload" className="input-label">Upload Drone Data (.tiff, .geojson)</label>
+          <input id="drone-upload" type="file" accept=".tiff,.geojson" onChange={handleDroneFileUpload} />
+          <label htmlFor="soil-upload" className="input-label">Upload Soil Sensor Data (.csv)</label>
+          <input id="soil-upload" type="file" accept=".csv" onChange={handleSoilFileUpload} />
+          {soilUploadError && <p className="form-feedback error">{soilUploadError}</p>}
+          {soilUploadSuccess && <p className="form-feedback success">{soilUploadSuccess}</p>}
+        </section>
+
+        <section className="zones-grid">
+          {displayFarm.zones.map((zone) => (
+            <article className="card zone-card" key={zone.id}>
+              <h3>{zone.name}</h3>
+              <div className="zone-details">
+                <p><span>Soil Moisture</span><strong>{zone.moisture}</strong></p>
+                <p><span>Fertility</span><strong>{zone.fertility}</strong></p>
+                <p><span>AI Recommendation</span><strong>{zone.recommendation}</strong></p>
+              </div>
+            </article>
           ))}
-        </select>
-      </div>
+        </section>
 
-      <div className="card">
-        <h2>Upload New Data</h2>
-        <label htmlFor="drone-upload" style={{ display: 'block', marginBottom: '0.5rem' }}>Upload Drone Data (.tiff, .geojson)</label>
-        <input id="drone-upload" type="file" accept=".tiff,.geojson" onChange={handleDroneFileUpload} />
-        <label htmlFor="soil-upload" style={{ display: 'block', margin: '1rem 0 0.5rem' }}>Upload Soil Sensor Data (.csv)</label>
-        <input id="soil-upload" type="file" accept=".csv" onChange={handleSoilFileUpload} />
-        {soilUploadError && <p style={{ color: '#ff5b5b', marginTop: '0.75rem' }}>{soilUploadError}</p>}
-        {soilUploadSuccess && <p style={{ color: '#25a55f', marginTop: '0.75rem' }}>{soilUploadSuccess}</p>}
-      </div>
-
-      {displayFarm.zones.map((zone) => (
-        <div className="card" key={zone.id}>
-          <h2>{zone.name}</h2>
-          <p><strong>Soil Moisture:</strong> {zone.moisture}</p>
-          <p><strong>Fertility:</strong> {zone.fertility}</p>
-          <p><strong>AI Recommendation:</strong> {zone.recommendation}</p>
-        </div>
-      ))}
-
-      <div className="card"><Link href="/settings"><button>Settings</button></Link></div>
+        <section className="card actions-card">
+          <div className="actions-content">
+            <h2>Settings &amp; Administration</h2>
+            <p>Fine-tune alerts, user access, and system integrations for your farm operation.</p>
+            <Link href="/settings"><button>Open Settings</button></Link>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
