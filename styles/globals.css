@@ -187,10 +187,6 @@ input[type="file"]:focus {
 .zone-card {
   border: 1px solid rgba(109, 163, 77, 0.4);
   background: rgba(255, 255, 255, 0.96);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  height: 100%;
 }
 
 .zone-card h3 {
@@ -215,28 +211,19 @@ input[type="file"]:focus {
 
 .zone-details p {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 0;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 10px 0;
   color: rgba(47, 62, 47, 0.85);
-  word-break: break-word;
-  line-height: 1.45;
 }
 
 .zone-details span {
-  font-weight: 600;
+  font-weight: 500;
   color: rgba(47, 62, 47, 0.7);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  line-height: 1.2;
 }
 
 .zone-details strong {
   color: var(--ag-forest);
-  font-size: 1.05rem;
-  line-height: 1.4;
-  word-break: break-word;
 }
 
 .zone-drone {
@@ -294,9 +281,6 @@ input[type="file"]:focus {
   overflow: hidden;
   background: linear-gradient(135deg, rgba(232, 243, 219, 0.8), rgba(247, 242, 231, 0.85));
   box-shadow: inset 0 0 0 1px rgba(47, 62, 47, 0.08);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .drone-image-wrapper img {
