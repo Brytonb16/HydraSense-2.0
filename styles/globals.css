@@ -181,6 +181,7 @@ input[type="file"]:focus {
   gap: 28px;
   width: 100%;
   align-items: stretch;
+  grid-auto-rows: 1fr;
 }
 
 .zone-card {
@@ -188,6 +189,8 @@ input[type="file"]:focus {
   background: rgba(255, 255, 255, 0.96);
   display: flex;
   flex-direction: column;
+  gap: 24px;
+  height: 100%;
 }
 
 .zone-card h3 {
@@ -199,22 +202,25 @@ input[type="file"]:focus {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 28px;
+  align-items: start;
+  min-height: 0;
 }
 
 .zone-details {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   min-width: 0;
 }
 
 .zone-details p {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   margin: 0;
   color: rgba(47, 62, 47, 0.85);
   word-break: break-word;
+  line-height: 1.45;
 }
 
 .zone-details span {
@@ -223,19 +229,22 @@ input[type="file"]:focus {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 0.75rem;
+  line-height: 1.2;
 }
 
 .zone-details strong {
   color: var(--ag-forest);
   font-size: 1.05rem;
   line-height: 1.4;
+  word-break: break-word;
 }
 
 .zone-drone {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   min-width: 0;
+  height: 100%;
 }
 
 .zone-drone-header {
@@ -244,6 +253,7 @@ input[type="file"]:focus {
   align-items: baseline;
   gap: 12px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .zone-drone h4 {
@@ -285,6 +295,8 @@ input[type="file"]:focus {
   background: linear-gradient(135deg, rgba(232, 243, 219, 0.8), rgba(247, 242, 231, 0.85));
   box-shadow: inset 0 0 0 1px rgba(47, 62, 47, 0.08);
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .drone-image-wrapper img {
