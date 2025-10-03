@@ -181,7 +181,7 @@ export default function Dashboard() {
                   <div className="zone-details">
                     <p><span>Soil Moisture</span><strong>{zone.moisture}</strong></p>
                     <p><span>Fertility</span><strong>{zone.fertility}</strong></p>
-                    <p><span>AI Recommendation</span><strong>{zone.recommendation}</strong></p>
+                    <p><span>AI Insight</span><strong>{zone.recommendation}</strong></p>
                   </div>
                   <div className="zone-drone">
                     <div className="zone-drone-header">

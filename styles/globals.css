@@ -312,6 +312,26 @@ input[type="file"]:focus {
   align-items: flex-start;
 }
 
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-form button {
+  width: 100%;
+}
+
 button {
   background: linear-gradient(135deg, var(--ag-forest), var(--ag-leaf));
   color: #ffffff;

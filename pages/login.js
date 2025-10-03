@@ -10,11 +10,13 @@ export default function Login() {
     <div className="container">
       <Head><title>Login | HydraSense AI</title></Head>
       <div className="header"><img src="/logo.svg" alt="Logo" /></div>
-      <div className="card">
+      <div className="card login-card">
         <h1>Login</h1>
-        <input type="text" placeholder="Email" /><br />
-        <input type="password" placeholder="Password" /><br />
-        <button onClick={handleLogin}>Login</button>
+        <div className="login-form">
+          <input type="text" placeholder="Username" />
+          <input type="password" placeholder="Password" />
+          <button onClick={handleLogin}>Login</button>
+        </div>
       </div>
     </div>
   );
