@@ -1,32 +1,57 @@
 
+:root {
+  --ag-forest: #2d5a27;
+  --ag-leaf: #6da34d;
+  --ag-sage: #dcead2;
+  --ag-cream: #f7f2e7;
+  --ag-earth: #2f3e2f;
+  --ag-highlight: #c7d58c;
+  --ag-sky: #edf7e3;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at 20% 20%, #e5f7ff 0%, #f5fffb 40%, #d6f0ff 100%);
+  background: linear-gradient(160deg, var(--ag-cream) 0%, var(--ag-sage) 55%, var(--ag-sky) 100%);
   margin: 0;
-  padding: 0;
-  color: #0a3042;
+  padding: 40px 16px;
+  color: var(--ag-earth);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#__next {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
   width: 100%;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 32px 24px 64px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
 }
 
 .header {
-  background: linear-gradient(135deg, rgba(0, 119, 182, 0.92), rgba(7, 190, 184, 0.9));
+  background: linear-gradient(135deg, rgba(45, 90, 39, 0.92), rgba(125, 178, 73, 0.9));
   padding: 28px 20px;
   text-align: center;
-  border-radius: 24px;
-  margin-bottom: 40px;
-  box-shadow: 0 12px 32px rgba(5, 84, 104, 0.25);
+  border-radius: 28px;
+  margin-bottom: 16px;
+  box-shadow: 0 16px 40px rgba(45, 90, 39, 0.22);
 }
 
 .header img {
   width: 170px;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18));
 }
 
 .dashboard-page {
@@ -45,36 +70,36 @@ body {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 28px 32px;
-  box-shadow: 0 16px 40px rgba(16, 71, 89, 0.12);
-  border: 1px solid rgba(39, 174, 186, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  padding: 32px 36px;
+  box-shadow: 0 18px 46px rgba(47, 62, 47, 0.12);
+  border: 1px solid rgba(109, 163, 77, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(16, 71, 89, 0.16);
+  box-shadow: 0 24px 56px rgba(47, 62, 47, 0.18);
 }
 
 .card h1,
 .card h2,
 .card h3 {
   margin-top: 0;
-  color: #063d4d;
+  color: var(--ag-forest);
 }
 
 .card-subtitle {
   margin: 8px 0 24px;
-  color: #0d7a88;
+  color: var(--ag-leaf);
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .primary-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(214, 245, 255, 0.9));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(214, 234, 205, 0.92));
 }
 
 .farm-highlights {
@@ -86,7 +111,7 @@ body {
 
 .highlight-label {
   display: block;
-  color: #0f5e6f;
+  color: var(--ag-forest);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -96,14 +121,14 @@ body {
 .highlight-value {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #023a4a;
+  color: var(--ag-earth);
 }
 
 .input-label {
   display: block;
   font-weight: 600;
   margin: 18px 0 8px;
-  color: #0d5664;
+  color: var(--ag-forest);
 }
 
 select,
@@ -111,7 +136,7 @@ input[type="file"] {
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(6, 61, 77, 0.15);
+  border: 1px solid rgba(47, 62, 47, 0.18);
   font-size: 1rem;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.85);
@@ -121,18 +146,18 @@ input[type="file"] {
 select:focus,
 input[type="file"]:focus {
   outline: none;
-  border-color: rgba(0, 119, 182, 0.8);
-  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2);
+  border-color: rgba(109, 163, 77, 0.8);
+  box-shadow: 0 0 0 3px rgba(109, 163, 77, 0.25);
 }
 
 .upload-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(226, 249, 242, 0.95));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(223, 240, 211, 0.95));
 }
 
 .section-description {
   margin-top: -8px;
   margin-bottom: 16px;
-  color: #0a4d5a;
+  color: rgba(47, 62, 47, 0.85);
 }
 
 .form-feedback {
@@ -145,7 +170,7 @@ input[type="file"]:focus {
 }
 
 .form-feedback.success {
-  color: #0f9d58;
+  color: #2d8a4c;
 }
 
 .zones-grid {
@@ -155,8 +180,8 @@ input[type="file"]:focus {
 }
 
 .zone-card {
-  border: 1px solid rgba(0, 149, 135, 0.45);
-  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(109, 163, 77, 0.4);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .zone-card h3 {
@@ -175,16 +200,16 @@ input[type="file"]:focus {
   justify-content: space-between;
   align-items: baseline;
   margin: 10px 0;
-  color: #0d4755;
+  color: rgba(47, 62, 47, 0.85);
 }
 
 .zone-details span {
   font-weight: 500;
-  color: #0a5466;
+  color: rgba(47, 62, 47, 0.7);
 }
 
 .zone-details strong {
-  color: #06706f;
+  color: var(--ag-forest);
 }
 
 .zone-drone {
@@ -203,7 +228,7 @@ input[type="file"]:focus {
 .zone-drone h4 {
   margin: 0;
   font-size: 1.05rem;
-  color: #054b5a;
+  color: var(--ag-forest);
 }
 
 .drone-status {
@@ -212,32 +237,32 @@ input[type="file"]:focus {
   text-transform: uppercase;
   padding: 4px 12px;
   border-radius: 999px;
-  background: rgba(6, 61, 77, 0.08);
-  color: #0d5664;
+  background: rgba(47, 62, 47, 0.08);
+  color: var(--ag-forest);
   font-weight: 700;
   white-space: nowrap;
 }
 
 .drone-status-ready {
-  background: rgba(15, 157, 88, 0.18);
-  color: #117a3b;
+  background: rgba(45, 90, 39, 0.18);
+  color: #2d8a4c;
 }
 
 .drone-status-awaiting-upload {
-  background: rgba(148, 163, 184, 0.2);
-  color: #475569;
+  background: rgba(171, 188, 150, 0.25);
+  color: rgba(47, 62, 47, 0.78);
 }
 
 .drone-status-processing {
-  background: rgba(253, 200, 47, 0.2);
-  color: #b7791f;
+  background: rgba(246, 210, 88, 0.2);
+  color: #a37520;
 }
 
 .drone-image-wrapper {
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(219, 246, 255, 0.7), rgba(233, 255, 245, 0.7));
-  box-shadow: inset 0 0 0 1px rgba(6, 61, 77, 0.06);
+  background: linear-gradient(135deg, rgba(232, 243, 219, 0.8), rgba(247, 242, 231, 0.85));
+  box-shadow: inset 0 0 0 1px rgba(47, 62, 47, 0.08);
 }
 
 .drone-image-wrapper img {
@@ -248,18 +273,18 @@ input[type="file"]:focus {
 
 .drone-summary {
   margin: 0;
-  color: #0a5466;
+  color: rgba(47, 62, 47, 0.8);
   font-weight: 500;
 }
 
 .drone-recommendation {
   margin: 0;
-  color: #054b5a;
+  color: var(--ag-forest);
   font-weight: 600;
 }
 
 .actions-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(209, 237, 255, 0.95));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(220, 236, 206, 0.95));
 }
 
 .actions-content {
@@ -270,7 +295,7 @@ input[type="file"]:focus {
 }
 
 button {
-  background: linear-gradient(135deg, #0077b6, #00a4a6);
+  background: linear-gradient(135deg, var(--ag-forest), var(--ag-leaf));
   color: #ffffff;
   padding: 12px 26px;
   border: none;
@@ -278,13 +303,13 @@ button {
   border-radius: 999px;
   cursor: pointer;
   letter-spacing: 0.03em;
-  box-shadow: 0 12px 24px rgba(0, 119, 182, 0.25);
+  box-shadow: 0 12px 24px rgba(45, 90, 39, 0.22);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 30px rgba(0, 119, 182, 0.35);
+  box-shadow: 0 16px 34px rgba(45, 90, 39, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -293,7 +318,7 @@ button:hover {
   }
 
   .card {
-    padding: 24px 22px;
+    padding: 26px 24px;
   }
 
   .farm-highlights {
