@@ -61,30 +61,34 @@ export default function Dashboard() {
   const router = useRouter();
   const { farmId } = router.query;
 
+  const [farmData, setFarmData] = useState(() => farms.map(cloneFarm));
   const [selectedFarmId, setSelectedFarmId] = useState('');
-  const [displayFarm, setDisplayFarm] = useState(null);
-  const [soilUploadError, setSoilUploadError] = useState('');
-  const [soilUploadSuccess, setSoilUploadSuccess] = useState('');
+  const [uploadStatuses, setUploadStatuses] = useState({});
 
-  const farmOptions = useMemo(() => farms.map(({ id, name }) => ({ id, name })), []);
+  const farmOptions = useMemo(() => farmData.map(({ id, name }) => ({ id, name })), [farmData]);
+  const displayFarm = useMemo(
+    () => farmData.find((farm) => farm.id === selectedFarmId) || null,
+    [farmData, selectedFarmId]
+  );
 
   useEffect(() => {
     if (!router.isReady) return;
-    if (typeof farmId === 'string' && farms.some((farm) => farm.id === farmId)) {
+    if (typeof farmId === 'string' && farmData.some((farm) => farm.id === farmId)) {
       setSelectedFarmId(farmId);
-    } else if (farms.length > 0) {
-      setSelectedFarmId(farms[0].id);
+    } else if (farmData.length > 0) {
+      setSelectedFarmId(farmData[0].id);
     }
-  }, [router.isReady, farmId]);
+  }, [router.isReady, farmId, farmData]);
 
-  useEffect(() => {
-    if (!selectedFarmId) return;
-    const baseFarm = farms.find((farm) => farm.id === selectedFarmId);
-    if (!baseFarm) return;
-    setDisplayFarm(cloneFarm(baseFarm));
-    setSoilUploadError('');
-    setSoilUploadSuccess('');
-  }, [selectedFarmId]);
+  const updateFarmStatus = (farmIdValue, statusUpdate) => {
+    setUploadStatuses((current) => {
+      const existingStatus = current[farmIdValue] || {};
+      return {
+        ...current,
+        [farmIdValue]: { ...existingStatus, ...statusUpdate }
+      };
+    });
+  };
 
   const handleFarmChange = (event) => {
     const newFarmId = event.target.value;
@@ -92,29 +96,51 @@ export default function Dashboard() {
     router.replace({ pathname: '/dashboard', query: { farmId: newFarmId } }, undefined, { shallow: true });
   };
 
-  const handleSoilFileUpload = async (event) => {
+  const handleSoilFileUpload = async (farmIdValue, event) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     try {
       const fileContents = await file.text();
       const zones = parseSoilCsv(fileContents);
-      setDisplayFarm((current) => (current ? { ...current, zones } : current));
-      setSoilUploadError('');
-      setSoilUploadSuccess(`Loaded soil data from ${file.name}`);
+      setFarmData((current) =>
+        current.map((farm) => (farm.id === farmIdValue ? { ...farm, zones } : farm))
+      );
+      const farm = farmData.find((entry) => entry.id === farmIdValue);
+      const cropLabel = farm ? `${farm.crop} data` : 'farm data';
+      updateFarmStatus(farmIdValue, {
+        error: '',
+        success: `Loaded soil sensor CSV from ${file.name}. Insights will be refreshed for ${cropLabel}.`
+      });
     } catch (error) {
-      setSoilUploadError(error.message || 'Failed to parse soil data file.');
-      setSoilUploadSuccess('');
+      updateFarmStatus(farmIdValue, {
+        error: error.message || 'Failed to parse soil data file.',
+        success: ''
+      });
     } finally {
       event.target.value = '';
     }
   };
 
-  const handleDroneFileUpload = (event) => {
+  const handleDroneFileUpload = (farmIdValue, event) => {
     const file = event.target.files?.[0];
     if (!file) return;
-    setSoilUploadSuccess(`Drone imagery file ${file.name} received. Processing will begin shortly.`);
-    setSoilUploadError('');
+    updateFarmStatus(farmIdValue, {
+      error: '',
+      success: `Drone imagery file ${file.name} received. AI processing is queued for this farm.`
+    });
+    event.target.value = '';
+  };
+
+  const handleReportUpload = (farmIdValue, event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const farm = farmData.find((entry) => entry.id === farmIdValue);
+    const cropLabel = farm ? farm.crop : 'this crop';
+    updateFarmStatus(farmIdValue, {
+      error: '',
+      success: `Report ${file.name} submitted for OpenAI review of ${cropLabel} performance.`
+    });
     event.target.value = '';
   };
 
@@ -160,14 +186,48 @@ export default function Dashboard() {
         </section>
 
         <section className="card upload-card">
-          <h2>Upload New Data</h2>
-          <p className="section-description">Keep your dashboards up-to-date with the latest sensor and drone insights.</p>
-          <label htmlFor="drone-upload" className="input-label">Upload Drone Data (.tiff, .geojson)</label>
-          <input id="drone-upload" type="file" accept=".tiff,.geojson" onChange={handleDroneFileUpload} />
-          <label htmlFor="soil-upload" className="input-label">Upload Soil Sensor Data (.csv)</label>
-          <input id="soil-upload" type="file" accept=".csv" onChange={handleSoilFileUpload} />
-          {soilUploadError && <p className="form-feedback error">{soilUploadError}</p>}
-          {soilUploadSuccess && <p className="form-feedback success">{soilUploadSuccess}</p>}
+          <h2>Farm Data Intake</h2>
+          <p className="section-description">
+            Upload data per farm to keep AI feedback aligned to crop type, acreage, and the latest field activity.
+          </p>
+          <div className="farm-upload-grid">
+            {farmData.map((farm) => {
+              const status = uploadStatuses[farm.id] || {};
+              return (
+                <div className="farm-upload-panel" key={farm.id}>
+                  <div className="farm-upload-header">
+                    <h3>{farm.name}</h3>
+                    <p className="farm-upload-meta">{farm.crop} &middot; {farm.acreage} acres</p>
+                  </div>
+                  <label htmlFor={`${farm.id}-drone-upload`} className="input-label">Upload Drone Data (.tiff, .geojson)</label>
+                  <input
+                    id={`${farm.id}-drone-upload`}
+                    type="file"
+                    accept=".tiff,.geojson"
+                    onChange={(event) => handleDroneFileUpload(farm.id, event)}
+                  />
+                  <label htmlFor={`${farm.id}-soil-upload`} className="input-label">Upload Soil Sensor Data (.csv)</label>
+                  <input
+                    id={`${farm.id}-soil-upload`}
+                    type="file"
+                    accept=".csv"
+                    onChange={(event) => handleSoilFileUpload(farm.id, event)}
+                  />
+                  <label htmlFor={`${farm.id}-report-upload`} className="input-label">
+                    Upload Reports &amp; Lab Results (.pdf, .xls, .xlsx)
+                  </label>
+                  <input
+                    id={`${farm.id}-report-upload`}
+                    type="file"
+                    accept=".pdf,.xls,.xlsx"
+                    onChange={(event) => handleReportUpload(farm.id, event)}
+                  />
+                  {status.error && <p className="form-feedback error">{status.error}</p>}
+                  {status.success && <p className="form-feedback success">{status.success}</p>}
+                </div>
+              );
+            })}
+          </div>
         </section>
 
         <section className="zones-grid">

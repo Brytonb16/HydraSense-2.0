@@ -162,6 +162,37 @@ input[type="file"]:focus {
   color: rgba(47, 62, 47, 0.85);
 }
 
+.farm-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.farm-upload-panel {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid rgba(109, 163, 77, 0.3);
+  box-shadow: 0 10px 22px rgba(36, 56, 36, 0.08);
+}
+
+.farm-upload-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.farm-upload-panel h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.farm-upload-meta {
+  margin: 0;
+  color: rgba(47, 62, 47, 0.7);
+  font-weight: 600;
+}
+
 .form-feedback {
   margin-top: 14px;
   font-weight: 600;
